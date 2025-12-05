@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semangat Amelia!</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="gift-container">
+    <a href="index_modified.html" class="gift-link">
+      <img src="https://feeldreams.github.io/kadoin.png" alt="Buka Hadiah" class="gift-icon">
+    </a>
+    <p class="hint-text">Klik kado ini ➜</p>
+  </div>
+
+  <div class="card">
+    <div class="imgBox">
+      <div class="bark"></div>
+      <img src="foto.jpg" alt="Amelia Sianturi">
+    </div>
+    <div class="details">
+      <h4 class="title-main">GOOD LUCK AMELIA!</h4>
+      <h4 class="title-sub">(Do Your Best Today!)</h4>
+      
+      <div class="message-body">
+        <p>Hai, Amelia Sianturi</p>
+        <p>Hari ini panggung milikmu.</p>
+        <p>Semua latihan & kerja kerasmu</p>
+        <p>akan membuahkan hasil.</p>
+        <p>Jangan takut, jangan ragu.</p>
+        <p>Tuhan menyertaimu.</p>
+        <p class="bible-verse">"Segala perkara dapat kutanggung di dalam Dia yang memberi kekuatan kepadaku."</p>
+      </div>
+
+      <p class="text-right">Fighting!!</p>
+      <p class="text-right">- S</p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    window.onload = () => {
+      const duration = 3 * 1000;
+      const end = Date.now() + duration;
+      (function frame() {
+        confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#FFD700', '#0277BD'] });
+        confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#FFD700', '#0277BD'] });
+        if (Date.now() < end) requestAnimationFrame(frame);
+      })();
+    };
+  </script>
+</body>
+</html>

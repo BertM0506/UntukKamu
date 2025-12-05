@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semangat Amelia!</title>
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://kit.fontawesome.com/4f3ce16e3e.js" crossorigin="anonymous"></script>
+
+  <style>
+    /* --- CSS INTERNAL KHUSUS HALAMAN INI --- */
+    body {
+      margin: 0; padding: 0;
+      background: #000;
+      height: 100vh;
+      display: flex; justify-content: center; align-items: center;
+      font-family: 'Indie Flower', cursive;
+      overflow: hidden; color: white;
+    }
+
+    /* Animasi Latar Belakang (Bintang & Kelap-kelip) */
+    .stars, .twinkling {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block;
+    }
+    .stars { background: #000 url('http://www.script-tutorials.com/demos/360/images/stars.png') repeat top center; z-index: 0; }
+    .twinkling { background: transparent url('http://www.script-tutorials.com/demos/360/images/twinkling.png') repeat top center; z-index: 1; animation: move-twink-back 200s linear infinite; }
+    @keyframes move-twink-back { from {background-position:0 0;} to {background-position:-10000px 5000px;} }
+    
+    /* Kontainer Utama */
+    .container {
+      position: relative; z-index: 2; text-align: center; padding: 20px;
+      background: rgba(0, 0, 0, 0.6); border-radius: 20px;
+      backdrop-filter: blur(8px); border: 1px solid rgba(255, 215, 0, 0.3);
+      max-width: 90%; width: 400px;
+    }
+
+    /* Foto Profil */
+    .profile-pic {
+      width: 160px; height: 160px; border-radius: 50%;
+      border: 4px solid #FFD700; object-fit: cover;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+      animation: floating 3s ease-in-out infinite;
+    }
+    @keyframes floating { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
+    
+    h1 { font-size: 2.2em; margin: 20px 0 10px 0; color: #FFD700; text-shadow: 2px 2px 4px #000; }
+    p { font-size: 1.2em; margin-bottom: 30px; }
+    
+    /* Tombol Buka Pesan */
+    .btn-action {
+      padding: 15px 30px; background: linear-gradient(45deg, #FFD700, #FFA000);
+      border: none; border-radius: 50px; font-size: 1.2em; color: #000;
+      font-weight: bold; cursor: pointer; box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+      transition: transform 0.2s; font-family: 'Indie Flower', cursive;
+    }
+    .btn-action:hover { transform: scale(1.1); box-shadow: 0 0 40px rgba(255, 215, 0, 0.8); }
+    
+    @media (max-width: 600px) { h1 { font-size: 1.6em; } .profile-pic { width: 120px; height: 120px; } }
+  </style>
+</head>
+<body>
+
+  <div class="stars"></div>
+  <div class="twinkling"></div>
+
+  <audio id="lagu" src="musik.mp3" loop></audio>
+
+  <div class="container">
+    <div class="photo-wrapper">
+      <img src="foto.jpg" alt="Amelia" class="profile-pic">
+    </div>
+    
+    <div class="content-text">
+      <h1>Hallo, Amelia! 👋</h1>
+      <p>Ada pesan penting buat kamu...</p>
+      
+      <button class="btn-action" onclick="playMusicAndMessage()">
+        <i class="fas fa-envelope-open"></i> Buka Pesan
+      </button>
+    </div>
+  </div>
+
+  <script>
+    var fungsiAwal = 0;
+    var audio = document.getElementById("lagu");
+
+    // --- FUNGSI UTAMA: MEMULAI MUSIK & PESAN ---
+    async function playMusicAndMessage() {
+      fungsiAwal = 1;
+      // Coba putar musik
+      try { await audio.play(); } catch (err) { console.log("Menunggu interaksi user untuk musik"); }
+
+      // Ubah tampilan awal
+      document.querySelector('.btn-action').style.display = 'none';
+      document.querySelector('h1').innerText = "Simak baik-baik ya...";
+      document.querySelector('p').innerText = "Tarik napas dulu, rileks... 🍃";
+
+      // --- URUTAN PERCAKAPAN (GIF SUDAH DIPERBARUI) ---
+      const steps = [
+        { 
+          title: 'Hai Amelia Sianturi!', 
+          text: 'Gimana jantung aman? Deg-degan parah ga?', 
+          imageUrl: 'https://media.giphy.com/media/l4FATJpd4LWgeruTK/giphy.gif', // Keringat dingin
+          confirmButtonText: 'Iya nih deg-degan 😭' 
+        },
+        { 
+          // GIF 1: TARIK NAPAS (BERUANG)
+          title: 'Ssstt... Tenang', 
+          text: 'Tarik napas... Tahan... Buang... 🌬️. Wajar kok kalau gugup, itu artinya kamu peduli sama lomba ini.', 
+          imageUrl: 'https://media.giphy.com/media/uUs14eCA2SBgs/giphy.gif', 
+          confirmButtonText: 'Udah agak tenang' 
+        },
+        { 
+          title: 'Btw Aku Perhatiin...', 
+          text: 'Hari ini aura kamu beda banget. Kayak ada sinar-sinar JUARA gitu lho ✨', 
+          imageUrl: 'https://media.giphy.com/media/kiBcwEXegBTACmVOnE/giphy.gif', // Mata berbinar
+          confirmButtonText: 'Ah masa sih? 😳' 
+        },
+        { 
+          title: 'Fakta Logika 🧠', 
+          text: 'Inget ya, lawan kamu itu juga manusia. Mereka juga makan nasi (bukan makan beling). Jadi GAK USAH TAKUT!', 
+          imageUrl: 'https://media.giphy.com/media/d3mlE7uhX8KFgEmY/giphy.gif', // Mikir
+          confirmButtonText: 'Bener juga ya wkwk' 
+        },
+        { 
+          title: 'Pertanyaan Penting', 
+          text: 'Tau gak bedanya kamu sama Piala Juara 1? 🏆', 
+          icon: 'question',
+          confirmButtonText: 'Apa tuh bedanya?' 
+        },
+        { 
+          // GIF 2: GOMBALAN (FINGER HEART)
+          title: 'Jawabannya...', 
+          text: 'Kalau Piala dipajang di lemari... Kalau Kamu dipajang di doa-doaku setiap hari. Eaaaa... 🤣', 
+          imageUrl: 'https://media.giphy.com/media/l2R0eYcNq9rJUsVAA/giphy.gif', 
+          confirmButtonText: 'Bisa aja lu! 🤣' 
+        },
+        { 
+          title: 'Oke Serius Dikit', 
+          text: 'Mel, lihat ke belakang sebentar. Lihat seberapa jauh kamu udah melangkah. Latihanmu gak akan mengkhianatimu.', 
+          icon: 'info',
+          confirmButtonText: 'Siap!' 
+        },
+        { 
+          title: 'FOKUS!', 
+          text: 'Nanti pas lomba, gak usah mikir menang/kalah. Pikirin aja: "Gue mau tampil keren, gue mau enjoy!"', 
+          imageUrl: 'https://media.giphy.com/media/1iTH1WIUjM0VATSw/giphy.gif', // Tinju semangat
+          confirmButtonText: 'Oke, Aku Paham!' 
+        },
+        { 
+          // GIF 3: DOA (TANGAN BERDOA)
+          title: 'Doa Untukmu 🙏', 
+          text: '"Tuhan menyertai langkahmu. Tidak ada yang mustahil bagi orang yang percaya."', 
+          imageUrl: 'https://media.giphy.com/media/ka0pMxG6T6h9lEhlgp/giphy.gif', 
+          confirmButtonText: 'Amin 😇' 
+        },
+        { 
+          title: 'Satu Pesan Terakhir', 
+          text: 'Menang atau kalah itu bonus. Tapi keberanian kamu buat maju hari ini, itu yang bikin aku bangga.', 
+          imageUrl: 'https://media.giphy.com/media/9G0AdBbVrkV3O/giphy.gif', // Jempol
+          confirmButtonText: 'Makasih ya...' 
+        },
+        { 
+          // GIF 4: GASKEUN (SEMANGAT MEMBARA)
+          title: 'SEKARANG...', 
+          text: 'Tunjukkan pada dunia siapa Amelia Sianturi! Hajar semuanya! GASKEUN!! 🔥🔥🔥', 
+          imageUrl: 'https://media.giphy.com/media/Lopx9eUi34rbq/giphy.gif', 
+          confirmButtonText: 'GASKEUN!!! 🔥',
+          confirmButtonColor: '#d33' // Tombol Merah
+        }
+      ];
+
+      // --- LOOP MENAMPILKAN PESAN ---
+      for (const step of steps) {
+        await Swal.fire({
+          title: step.title,
+          text: step.text,
+          imageUrl: step.imageUrl,
+          imageWidth: 200,
+          imageHeight: 200,
+          icon: step.icon,
+          confirmButtonText: step.confirmButtonText || 'Lanjut',
+          confirmButtonColor: step.confirmButtonColor || '#013243',
+          background: '#fff',
+          backdrop: `rgba(0,0,0,0.5)`,
+          allowOutsideClick: false
+        });
+      }
+
+      // --- PESAN PENUTUP SEBELUM KE WA ---
+      await Swal.fire({
+        title: 'Good Luck!',
+        text: 'Kabari aku kalau udah selesai ya! Klik tombol di bawah buat kirim pesan.',
+        icon: 'success',
+        confirmButtonText: 'Kirim Chat ke Aku ->',
+        confirmButtonColor: '#25D366'
+      });
+
+      menuju();
+    }
+
+    // --- FUNGSI MENGIRIM WA ---
+    async function menuju(){
+      // Nomor WhatsApp Kamu (Pengirim)
+      var nomorWhatsApp = "6281283446636"; 
+      
+      // Pesan yang akan dikirim Amelia ke kamu
+      var pesanwhatsapp = "Wkwkwk makasih supportnya! Lucu banget slide-nya 🤣. Doain aku yaaa, aku mau maju sekarang! 🔥😇";
+      
+      // Membuka WhatsApp
+      window.location = "https://api.whatsapp.com/send/?phone=" + nomorWhatsApp + "&text=" + pesanwhatsapp + "&type=phone_number&app_absent=0";
+      
+      // Ubah Tampilan Akhir di Layar
+      document.querySelector('.container').innerHTML = `
+        <h1 style="font-size:3em; color:#FFD700; text-shadow:0 0 20px gold;">SEMANGAT!! 🔥</h1>
+        <p>You can do it!</p>
+        <br><a href="index.html" style="color:white; border-bottom:1px solid white; text-decoration:none;">Ulangi Lagi</a>
+      `;
+    }
+
+    // --- FIX AUTOPLAY AUDIO ---
+    document.body.addEventListener('click', function() {
+      if (audio.paused && fungsiAwal == 1) {
+        audio.play();
+      }
+    }, {once: true});
+
+  </script>
+</body>
+</html>
